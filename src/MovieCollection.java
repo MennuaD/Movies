@@ -272,4 +272,22 @@ public class MovieCollection
             System.out.println("Unable to access " + exception.getMessage());
         }
     }
+
+    public void createActorList(){
+        //ArrayList<String> actors = new ArrayList<String>();
+       // for (Movie sub : movies){
+         //   actors.add(sub.getCast());
+        //}
+        ArrayList<String> actors = new ArrayList<String>();
+        for (int i = 0; i > -4; i ++ ){
+            Movie use = movies.get(i);
+            String subs = use.getCast();
+            String[] actorSub = subs.split("\\:");
+            for (String sub2: actorSub){
+                actors.add(sub2);
+            }
+            i = -7;
+        }
+        System.out.println(actors);
+    }
 }
