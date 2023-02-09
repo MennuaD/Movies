@@ -222,6 +222,64 @@ public class MovieCollection
 
     private void listGenres()
     {
+        String genres = "";
+        ArrayList<String> arr = new ArrayList<String>();
+        for (int i = 0; i < movies.size(); i++)
+        {
+            genres += movies.get(i).getGenres();
+            genres += "|";
+
+        }
+        ArrayList<String> standIn = new ArrayList<String>();
+        String[] subs = genres.split("\\|");
+        for (String sub2: subs){
+            standIn.add(sub2);
+        }
+
+        for (int i = 0; i < standIn.size(); i ++){
+            for (int j = i + 1; j < standIn.size(); j ++){
+                if(standIn.get(i).compareTo(standIn.get(j)) > 0){
+                    String temp = standIn.get(i);
+                    standIn.set(i, standIn.get(j));
+                    standIn.set(j, temp);
+                }
+            }
+        }
+
+        ArrayList<String> genreList = new ArrayList<String>();
+        String check = "";
+        for (String sub : standIn){
+            if(!sub.equals(check)){
+                genreList.add(sub);
+                check = sub;
+            }
+        }
+        System.out.println(genreList);
+
+        for (int i = 0; i < genreList.size(); i++)
+        {
+            System.out.println(i + 1 + " " + genreList.get(i));
+        }
+
+        Scanner s = new Scanner(System.in);
+        int choice  = s.nextInt();
+
+        ArrayList<Movie> movie = new ArrayList<Movie>();
+        for (int i = 0; i < movies.size(); i++)
+        {
+            if (movies.get(i).getGenres().equals(genreList.get(choice - 1)))
+            {
+                movie.add(movies.get(i));
+            }
+        }
+
+        for (int i = 0; i < movie.size(); i++)
+        {
+            System.out.println(i + 1 + " " + movie.get(i));
+
+        }
+        int choice2 = s.nextInt();
+        displayMovieInfo(movie.get(choice2 - 1));
 
     }
 
@@ -282,12 +340,44 @@ public class MovieCollection
         for (int i = 0; i > -4; i ++ ){
             Movie use = movies.get(i);
             String subs = use.getCast();
-            String[] actorSub = subs.split("\\:");
+            String[] actorSub = subs.split("\\|");
             for (String sub2: actorSub){
                 actors.add(sub2);
             }
-            i = -7;
+           if(i > 4997){
+               i = -7;
+           }
         }
-        System.out.println(actors);
+        for (int i = 0; i < actors.size(); i ++){
+            for (int j = i + 1; j < actors.size(); j ++){
+                if(actors.get(i).compareTo(actors.get(j)) > 0){
+                    String temp = actors.get(i);
+                    actors.set(i, actors.get(j));
+                    actors.set(j, temp);
+                }
+            }
+        }
+
+       ArrayList<String> actors2 = new ArrayList<String>();
+        String check = "";
+        for (String sub : actors){
+            if(!sub.equals(check)){
+                actors2.add(sub);
+                check = sub;
+            }
+        }
+        System.out.println(actors2);
+        System.out.println(actors2.size());
+
     }
 }
+/*
+ArrayList<String> genreList2 = new ArrayList<String>();
+String check = "";
+for (String sub : genreList){
+if(!sub.equals(check)){
+genreList.add(sub);
+check = sub;
+}
+}
+ */
